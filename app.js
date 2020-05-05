@@ -1,12 +1,16 @@
-const http = require ('http');
-
 const express = require ('express');
 
-const app = express ();
+const routerPosts = require ('./Posts');
+
+let app;
+app = express ();
 
 app.listen (3000);
 
+app.use ("/posts" , routerPosts);
+
 app.get ("/" , (req , res) =>
 {
-
+    res.send ("/index.html");
+    res.end ();
 });
