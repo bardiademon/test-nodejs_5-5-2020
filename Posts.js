@@ -7,7 +7,7 @@ router = express.Router ();
 
 router.get ("/" , (req , res) =>
 {
-    res.send ("test posts 1545");
+    res.send ("Posts");
     res.end ();
 });
 
@@ -22,14 +22,33 @@ router.post ("/new" , async (req , res) =>
     {
         const savedPost = await post.save ();
         res.json (savedPost);
-    } catch (e)
+    }
+    catch (e)
     {
         res.json ({ message : e });
-    } finally
+    }
+    finally
     {
         res.end ();
     }
 
+});
+
+router.post ("/find" , async (req , res) =>
+{
+    try
+    {
+        const find = await Posts.find ();
+        res.json (find);
+    }
+    catch (e)
+    {
+        res.json ({ message : e.message });
+    }
+    finally
+    {
+        res.end ();
+    }
 });
 
 module.exports = router;
