@@ -51,4 +51,37 @@ router.post ("/find" , async (req , res) =>
     }
 });
 
+router.post ("/find/:id" , async (req , res) =>
+{
+    try
+    {
+        const find = await Posts.findById (req.params.id);
+        res.json (find);
+    }
+    catch (e)
+    {
+        res.json ({ message : e.message });
+    }
+    finally
+    {
+        res.end ();
+    }
+});
+router.post ("/remove/:id" , async (req , res) =>
+{
+    try
+    {
+        const remove = await Posts.remove ({ _id : req.params.id });
+        res.json (remove);
+    }
+    catch (e)
+    {
+        res.json ({ message : e.message });
+    }
+    finally
+    {
+        res.end ();
+    }
+});
+
 module.exports = router;
