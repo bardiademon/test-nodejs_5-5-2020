@@ -15,7 +15,7 @@ app.use ("/posts" , routerPosts);
 
 app.get ("/" , (req , res) =>
 {
-    res.send ("/index.html");
+    res.send ("/ Main router");
     res.end ();
 });
 

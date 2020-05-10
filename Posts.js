@@ -11,22 +11,24 @@ router.get ("/" , (req , res) =>
     res.end ();
 });
 
-router.post ("/new" , (req , res) =>
+router.post ("/new" , async (req , res) =>
 {
     const post = new Posts ({
         title : req.body.title ,
         body : req.body.body
     });
 
-    post.save ().then (data =>
+    try
     {
-        res.send (data);
-        res.end ();
-    }).catch (e =>
+        const savedPost = await post.save ();
+        res.json (savedPost);
+    } catch (e)
     {
-        res.send (data.message);
+        res.json ({ message : e });
+    } finally
+    {
         res.end ();
-    });
+    }
 
 });
 
