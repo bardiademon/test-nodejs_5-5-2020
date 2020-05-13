@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon --trace-deprecation  --exec babel-node app.js",
+    "start": "nodemon --trace-deprecation --exec babel-node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

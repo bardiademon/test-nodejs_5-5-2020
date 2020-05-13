@@ -7,6 +7,7 @@ import jwt from "jsonwebtoken";
 import sha256 from 'sha256';
 import Account from "./model/Account";
 import mongoose from "mongoose";
+import Login from "./model/Login";
 
 require ("dotenv/config");
 const { isEmpty } = require ("jsprim");
@@ -29,7 +30,7 @@ app.get ("/" , async (req , res) =>
     await res.render (path.join (__dirname , 'public' , 'views' , 'index.ejs') , { is_login : isLogin });
 });
 
-app.post ("/login" , async (req , res) =>
+app.post ("/sign" , async (req , res) =>
 {
     res.set ("Content-Type" , "text/json");
     if ((req.body.username !== undefined && req.body.password !== undefined) && (req.body.username !== null && req.body.password !== null))
@@ -47,7 +48,11 @@ app.post ("/login" , async (req , res) =>
                 await jwt.sign ({ info } , "sec_key" , {} , (err , token) =>
                 {
                     if (err) res.json ({ result : err.message });
-                    else res.json ({ result : token });
+                    else
+                    {
+                        (new Login ({ account : mongoose.Types.ObjectId (info._id) })).save ();
+                        res.json ({ result : token });
+                    }
                 });
             }
             res.end ();
