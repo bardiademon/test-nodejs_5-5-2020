@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 
-const postSchema = mongoose.Schema ({
+const PostSchema = mongoose.Schema ({
     "title" : {
         type : String ,
         required : true
@@ -15,4 +15,4 @@ const postSchema = mongoose.Schema ({
     }
 });
 
-export default mongoose.model ("posts" , postSchema);
+export default mongoose.model ("posts" , PostSchema);

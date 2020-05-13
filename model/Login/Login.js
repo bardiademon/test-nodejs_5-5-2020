@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 
-const loginSchema = mongoose.Schema ({
+const LoginSchema = mongoose.Schema ({
     account_id : {
         type : String ,
         required : true
@@ -11,4 +11,4 @@ const loginSchema = mongoose.Schema ({
     }
 });
 
-export default mongoose.model ("login" , loginSchema);
+export default mongoose.model ("login" , LoginSchema);

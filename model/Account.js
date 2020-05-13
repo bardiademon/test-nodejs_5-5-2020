@@ -1,6 +1,6 @@
 const mongoose = require ('mongoose');
 
-const accountSchema = mongoose.Schema ({
+const AccountSchema = mongoose.Schema ({
     "username" : {
         type : String ,
         required : true
@@ -15,4 +15,4 @@ const accountSchema = mongoose.Schema ({
     }
 });
 
-export default mongoose.model ("account" , accountSchema);
+export default mongoose.model ("account" , AccountSchema);

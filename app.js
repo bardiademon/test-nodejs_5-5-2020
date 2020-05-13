@@ -1,10 +1,10 @@
+require ("dotenv/config");
+
 const express = require ('express');
 const bodyParser = require ('body-parser');
 const cookieParser = require ('cookie-parser');
 const engines = require ('consolidate');
 const path = require ('path');
-
-require ("dotenv/config")
 
 const routerPosts = require ('./Posts');
 
@@ -31,7 +31,7 @@ app.get ("/" , async (req , res) =>
     await res.render (path.join (__dirname , 'public' , 'views' , 'index.ejs') , { is_login : isLogin });
 });
 
-mongoose.connect (process.env.db_connection , {
+mongoose.connect (process.env.connection , {
     useUnifiedTopology : true ,
     useNewUrlParser : true
 } , () => console.log ("connected!"));
