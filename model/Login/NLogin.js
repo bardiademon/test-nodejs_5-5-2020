@@ -1,1 +1,1 @@
-const Login = require ('Login');
+import Login from "model/Login/Login";

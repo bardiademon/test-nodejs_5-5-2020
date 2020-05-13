@@ -1,6 +1,5 @@
-const express = require ('express');
-
-const Posts = require ('./model/Posts');
+import Posts from "./model/Posts";
+import express from "express";
 
 let router;
 router = express.Router ();

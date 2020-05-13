@@ -1,13 +1,12 @@
+import express from "express";
+import cookieParser from "cookie-parser";
+import bodyParser from "body-parser";
+import engines from "consolidate";
+import path from "path";
+import routerPosts from "./Posts";
+import jwt from "jsonwebtoken";
+
 require ("dotenv/config");
-
-const express = require ('express');
-const bodyParser = require ('body-parser');
-const cookieParser = require ('cookie-parser');
-const engines = require ('consolidate');
-const path = require ('path');
-
-const routerPosts = require ('./Posts');
-
 let app;
 app = express ();
 
@@ -29,6 +28,17 @@ app.get ("/" , async (req , res) =>
     res.cookie ("userData" , 'test cookie value');
     let isLogin = true;
     await res.render (path.join (__dirname , 'public' , 'views' , 'index.ejs') , { is_login : isLogin });
+});
+
+app.post ("/login" , (req , res) =>
+{
+    if ((req.body.username !== undefined && req.body.password !== undefined) && (req.body.username !== null && req.body.password !== null))
+    {
+
+    }
+    else res.json ({ result : 'request is null' });
+
+    res.end ();
 });
 
 mongoose.connect (process.env.connection , {
