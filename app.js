@@ -8,6 +8,8 @@ import sha256 from 'sha256';
 import Account from "./model/Account";
 import mongoose from "mongoose";
 import Login from "./model/Login";
+import routerPosts from "./Router/Posts";
+
 
 require ("dotenv/config");
 const { isEmpty } = require ("jsprim");
@@ -17,6 +19,7 @@ app = express ();
 app.use (bodyParser.json ());
 app.use (cookieParser ());
 app.use (express.static (path.join (__dirname , 'public' , 'views')));
+app.use ("/posts" , routerPosts);
 
 app.engine ('html' , engines.mustache);
 app.set ('view engine' , 'html');
@@ -45,7 +48,7 @@ app.post ("/sign" , async (req , res) =>
             if (err || isEmpty (info)) res.json ({ result : 'not_found' });
             else
             {
-                await jwt.sign ({ info } , "sec_key" , {} , (err , token) =>
+                await jwt.sign ({ info } , process.env["security-jwt"] , {} , (err , token) =>
                 {
                     if (err) res.json ({ result : err.message });
                     else
