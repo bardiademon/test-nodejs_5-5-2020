@@ -1,5 +1,8 @@
 const express = require ('express');
 const bodyParser = require ('body-parser');
+const cookieParser = require ('cookie-parser');
+const engines = require ('consolidate');
+const path = require ('path');
 
 require ("dotenv/config")
 
@@ -9,14 +12,23 @@ let app;
 app = express ();
 
 app.use (bodyParser.json ());
+app.use (cookieParser ());
+app.use (express.static (path.join (__dirname , 'public' , 'views')));
+
+app.engine ('html' , engines.mustache);
+app.set ('view engine' , 'html');
 
 const mongoose = require ('mongoose');
 app.use ("/posts" , routerPosts);
 
-app.get ("/" , (req , res) =>
+app.get ("/" , async (req , res) =>
 {
-    res.send ("/ Main router");
-    res.end ();
+    res.status (200);
+    res.setHeader ("Content-Type" , "text/html");
+
+    res.cookie ("userData" , 'test cookie value');
+    let isLogin = true;
+    await res.render (path.join (__dirname , 'public' , 'views' , 'index.ejs') , { is_login : isLogin });
 });
 
 mongoose.connect (process.env.db_connection , {
@@ -24,6 +36,6 @@ mongoose.connect (process.env.db_connection , {
     useNewUrlParser : true
 } , () => console.log ("connected!"));
 
-app.listen (3000);
+app.listen (process.env.port);
 
 

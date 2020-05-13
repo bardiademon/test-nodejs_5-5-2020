@@ -1,18 +1,18 @@
 const mongoose = require ('mongoose');
 
-const postSchema = mongoose.Schema ({
-    "title" : {
+const accountSchema = mongoose.Schema ({
+    "username" : {
         type : String ,
         required : true
     } ,
-    "body" : {
+    "password" : {
         type : String ,
         required : true
     } ,
-    "date" : {
+    "created_at" : {
         type : Date ,
         default : Date.now
     }
 });
 
-export default mongoose.model ("posts" , postSchema);
+export default mongoose.model ("account" , accountSchema);
