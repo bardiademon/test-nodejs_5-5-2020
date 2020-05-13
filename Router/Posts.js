@@ -1,6 +1,7 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
 import Posts from "../model/Posts";
+import { Types } from "mongoose";
 
 let router;
 router = express.Router ();
@@ -36,7 +37,7 @@ router.post ("/new" , validationToken , async (req , res) =>
             const body = req.body.body;
             if ((title !== undefined && body !== undefined) && (title !== null && body !== null))
             {
-                const post = new Posts ({ title , body });
+                const post = new Posts ({ title , body , account : Types.ObjectId (account._id) });
                 try
                 {
                     await post.save ();
